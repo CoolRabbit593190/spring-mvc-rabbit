@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.rabbit.java</groupId>
+    <artifactId>spring-mvc</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <modules>
+        <module>common</module>
+        <module>dao</module>
+        <module>service</module>
+        <module>serviceImpl</module>
+        <module>controller</module>
+    </modules>
+
+
+    <properties>
+        <mybatis-generator-core-version>1.3.5</mybatis-generator-core-version>
+        <mybatis-plus-version>2.1.2</mybatis-plus-version>
+        <log4j-version>1.2.17</log4j-version>
+        <org.springframework-version>4.3.9.RELEASE</org.springframework-version>
+        <aspectjweaver-version>1.8.10</aspectjweaver-version>
+        <jackson-version>2.8.9</jackson-version>
+        <org.hibernate-version>4.3.8.Final</org.hibernate-version>
+        <org.slf4j-version>1.7.25</org.slf4j-version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>common</id>
+            <properties>
+                <maven.druid.initialSize>3</maven.druid.initialSize>
+                <maven.druid.minIdle>3</maven.druid.minIdle>
+                <maven.druid.maxActive>20</maven.druid.maxActive>
+                <maven.druid.maxWait>60000</maven.druid.maxWait>
+                <maven.druid.timeBetweenEvictionRunsMillis>60000</maven.druid.timeBetweenEvictionRunsMillis>
+                <maven.druid.minEvictableIdleTimeMillis>300000</maven.druid.minEvictableIdleTimeMillis>
+                <maven.druid.maxPoolPreparedStatementPerConnectionSize>20
+                </maven.druid.maxPoolPreparedStatementPerConnectionSize>
+
+                <maven.cache.defaultExpiration>300</maven.cache.defaultExpiration>
+                <maven.redis.connect.timeout>2000</maven.redis.connect.timeout>
+                <maven.redis.pool.maxTotal>500</maven.redis.pool.maxTotal>
+                <maven.redis.pool.maxIdle>200</maven.redis.pool.maxIdle>
+                <maven.redis.pool.maxWaitMillis>10000</maven.redis.pool.maxWaitMillis>
+                <maven.redis.pool.testOnBorrow>true</maven.redis.pool.testOnBorrow>
+
+                <maven.log.info.level>DEBUG</maven.log.info.level>
+                <maven.log.err.level>WARN</maven.log.err.level>
+                <maven.log.additivity>false</maven.log.additivity>
+                <maven.log.ImmediateFlush>false</maven.log.ImmediateFlush>
+            </properties>
+        </profile>
+        <profile>
+            <id>toni</id>
+            <properties>
+                <maven.log.dir>/Users/Mr.Rabbit/Documents/Intellij/logs</maven.log.dir>
+                <maven.master.write.jdbc.url>jdbc:mysql://47.96.0.57:3306/mydb?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</maven.master.write.jdbc.url>
+
+                <maven.slave1.read.jdbc.url>jdbc:mysql://47.96.0.57:3306/mydb?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</maven.slave1.read.jdbc.url>
+                <maven.slave2.read.jdbc.url>jdbc:mysql://47.96.0.57:3306/mydb?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</maven.slave2.read.jdbc.url>
+                <maven.jdbc.user>root</maven.jdbc.user>
+                <maven.jdbc.passward>zh593190</maven.jdbc.passward>
+                <maven.jdbc.driverLocation>
+                    /Users/Mr.Rabbit/.m2/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
+                </maven.jdbc.driverLocation>
+                <!--<maven.redis.connect.hostName>10.68.97.67</maven.redis.connect.hostName>-->
+                <maven.redis.connect.hostName>47.96.0.57</maven.redis.connect.hostName>
+                <maven.redis.connect.port>6379</maven.redis.connect.port>
+                <maven.redis.connect.database>0</maven.redis.connect.database>
+                <maven.redis.connect.passward>zh593190</maven.redis.connect.passward>
+                <maven.jpa.generateDdl>true</maven.jpa.generateDdl>
+                <maven.jpa.showSql>true</maven.jpa.showSql>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <!--管理Spring所有组件版本-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${org.springframework-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis-generator-core-version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.mybatis</groupId>-->
+        <!--<artifactId>mybatis</artifactId>-->
+        <!--<version>${mybatis-version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.mybatis</groupId>-->
+        <!--<artifactId>mybatis-spring</artifactId>-->
+        <!--<version>${mybatis-spring-version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis-plus-version}</version>
+        </dependency>
+
+        <!-- log-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j-version}</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+
+        <!-- mysql db -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.34</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- testng 测试用-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+
+        <!--druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.28</version>
+        </dependency>
+
+        <!-- javaee api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+        <!--spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!--spring动态代理实现aop 不可缺少-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver-version}</version>
+        </dependency>
+
+        <!--jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.38</version>
+        </dependency>
+
+        <!--redis cache-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.3.2.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-tx</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context-support</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+
+        <!--支持servlet-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--nio-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.15.Final</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>

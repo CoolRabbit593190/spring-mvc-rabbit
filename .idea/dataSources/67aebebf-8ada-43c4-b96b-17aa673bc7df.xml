@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - mydb@47.96.0.57">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="mydb">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <schema id="7" parent="1" name="zenlife_2017_11_17"/>
+    <table id="8" parent="2" name="lifepay_bill"/>
+    <table id="9" parent="2" name="lifepay_family"/>
+    <table id="10" parent="2" name="lifepay_family_desc">
+      <Comment>`life_pay_family_desc`</Comment>
+    </table>
+    <table id="11" parent="2" name="lifepay_power_use_record"/>
+    <table id="12" parent="2" name="lifepay_record"/>
+    <table id="13" parent="2" name="lifepay_user"/>
+    <column id="14" parent="8" name="bill_id">
+      <Position>1</Position>
+      <Comment>账单id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="8" name="last_modify_date">
+      <Position>2</Position>
+      <Comment>修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="16" parent="8" name="power_bill">
+      <Position>3</Position>
+      <Comment>电费账单</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <column id="17" parent="8" name="power_rate">
+      <Position>4</Position>
+      <Comment>用电量</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <column id="18" parent="8" name="record_month">
+      <Position>5</Position>
+      <Comment>记录月份</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="19" parent="8" name="water_bill">
+      <Position>6</Position>
+      <Comment>水费账单</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <column id="20" parent="8" name="water_rate">
+      <Position>7</Position>
+      <Comment>用水量</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <key id="21" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>bill_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="22" parent="9" name="family_id">
+      <Position>1</Position>
+      <Comment>家庭id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="9" name="housemaster_name">
+      <Position>2</Position>
+      <Comment>户主姓名</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="9" name="last_modify_date">
+      <Position>3</Position>
+      <Comment>修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="25" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>family_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="26" parent="10" name="desc_id">
+      <Position>1</Position>
+      <Comment>descId</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="10" name="content">
+      <Position>2</Position>
+      <Comment>Content</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="28" parent="10" name="family_id">
+      <Position>3</Position>
+      <Comment>家庭id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="29" parent="10" name="FK_s8bb59e36smeel4rqgfr2ds1n">
+      <ColNames>family_id</ColNames>
+    </index>
+    <key id="30" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>desc_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="31" parent="10" name="FK_s8bb59e36smeel4rqgfr2ds1n">
+      <ColNames>family_id</ColNames>
+      <RefSchemaName>mydb</RefSchemaName>
+      <RefTableName>lifepay_family</RefTableName>
+      <RefColNames>family_id</RefColNames>
+    </foreign-key>
+    <column id="32" parent="11" name="record_id">
+      <Position>1</Position>
+      <Comment>记录id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="11" name="last_modify_date">
+      <Position>2</Position>
+      <Comment>修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="34" parent="11" name="power_use">
+      <Position>3</Position>
+      <Comment>用电量</Comment>
+      <DataType>double(10,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="11" name="record_month">
+      <Position>4</Position>
+      <Comment>记录月份</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="36" parent="11" name="family_id">
+      <Position>5</Position>
+      <Comment>家庭id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="37" parent="11" name="FK_mgc38a542fhy40usbq7yxiub0">
+      <ColNames>family_id</ColNames>
+    </index>
+    <key id="38" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>record_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="39" parent="11" name="FK_mgc38a542fhy40usbq7yxiub0">
+      <ColNames>family_id</ColNames>
+      <RefSchemaName>mydb</RefSchemaName>
+      <RefTableName>lifepay_family</RefTableName>
+      <RefColNames>family_id</RefColNames>
+    </foreign-key>
+    <column id="40" parent="12" name="record_id">
+      <Position>1</Position>
+      <Comment>记录id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="12" name="last_modify_date">
+      <Position>2</Position>
+      <Comment>修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="42" parent="12" name="power_cost">
+      <Position>3</Position>
+      <Comment>电费</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <column id="43" parent="12" name="record_month">
+      <Position>4</Position>
+      <Comment>记录月份</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="44" parent="12" name="water_cost">
+      <Position>5</Position>
+      <Comment>水费</Comment>
+      <DataType>double(10,2)|0</DataType>
+    </column>
+    <column id="45" parent="12" name="family_id">
+      <Position>6</Position>
+      <Comment>家庭id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="46" parent="12" name="FK_7pa8dcrwwy9cadf6dc2ecvvya">
+      <ColNames>family_id</ColNames>
+    </index>
+    <key id="47" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>record_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="48" parent="12" name="FK_7pa8dcrwwy9cadf6dc2ecvvya">
+      <ColNames>family_id</ColNames>
+      <RefSchemaName>mydb</RefSchemaName>
+      <RefTableName>lifepay_family</RefTableName>
+      <RefColNames>family_id</RefColNames>
+    </foreign-key>
+    <column id="49" parent="13" name="usr_id">
+      <Position>1</Position>
+      <Comment>用户id(主键)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="50" parent="13" name="last_modify_date">
+      <Position>2</Position>
+      <Comment>修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="51" parent="13" name="name">
+      <Position>3</Position>
+      <Comment>用户姓名</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="13" name="family_id">
+      <Position>4</Position>
+      <Comment>家庭id(主键)</Comment>
+      <DataType>int(18)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="53" parent="13" name="FK_s8bf59e36ktfnl4rqgfr2on1f">
+      <ColNames>family_id</ColNames>
+    </index>
+    <key id="54" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>usr_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="55" parent="13" name="FK_s8bf59e36ktfnl4rqgfr2on1f">
+      <ColNames>family_id</ColNames>
+      <RefSchemaName>mydb</RefSchemaName>
+      <RefTableName>lifepay_family</RefTableName>
+      <RefColNames>family_id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

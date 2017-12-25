@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder
+            location="classpath*:cache.properties,classpath*:datasource.properties,classpath*:MBG.properties"/>
+
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.rabbit.java"/>
+
+
+    <!--自动注入DefaultAnnotationHandlerMapping及AnnotationMethodHandlerAdapter这两个bean-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- 配置Fastjson支持 -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+                <property name="fastJsonConfig" ref="jsonConfig"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="jsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <property name="charset" value="UTF-8"/>
+        <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+        <!--<property name="serializeFilters" ref="serializeFilter"/>-->
+        <property name="features">
+            <list>
+                <value>AllowArbitraryCommas</value>
+                <value>AllowUnQuotedFieldNames</value>
+            </list>
+        </property>
+        <property name="serializerFeatures">
+            <list>
+                <!-- List字段如果为null,输出为[],而非null -->
+                <value>WriteNullListAsEmpty</value>
+                <!-- 是否输出值为null的字段 -->
+                <value>WriteMapNullValue</value>
+                <!-- 数值字段如果为null,输出为0,而非null -->
+                <value>WriteNullNumberAsZero</value>
+                <!-- 字符类型字段如果为null,输出为"",而非null  -->
+                <value>WriteNullStringAsEmpty</value>
+                <!-- 禁用避免循环引用检查 -->
+                <!--<value>DisableCircularReferenceDetect</value>-->
+            </list>
+        </property>
+    </bean>
+
+
+    <!--切面-->
+    <!--expose-proxy="true" 用于获取当前aop注解的动态代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
+
+    <!--将静态web资源交给DefaultServletHttpRequestHandler处理，避免静态资源被DispatcherServlet拦截-->
+    <mvc:default-servlet-handler/>
+
+    <!--启用声明式事务管理-->
+    <tx:annotation-driven/>
+
+    <!--<import resource="spring-datasource.xml"/>-->
+    <import resource="spring-cache.xml"/>
+    <import resource="spring-mybatis.xml"/>
+    <!--<import resource="spring-jpa.xml"/>-->
+</beans>

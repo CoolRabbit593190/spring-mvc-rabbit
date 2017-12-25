@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="MBG.properties"/>
+
+    <classPathEntry
+            location="/Users/Mr.Rabbit/.m2/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar"/>
+
+    <context id="MySqlTables" defaultModelType="flat" targetRuntime="MyBatis3">
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+            <property name="addRemarkComments" value="true"/><!--java类字段上添加对应数据库字段注释信息-->
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${maven.jdbc.url}"
+                        userId="root"
+                        password="zh593190">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+
+        <javaModelGenerator targetPackage="com.rabbit.java.domain.model" targetProject="src/main/java">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="false"/>
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true"/>
+            <!-- 建立的Model对象是否不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="sqlmapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--type：生成dao的方式
+            1.ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
+            2.MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
+            3.XMLMAPPER：会生成Mapper接口，接口完全依赖XML，推荐；-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.rabbit.java.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table schema="mydb" tableName="lifepay_bill" domainObjectName="LifePayBillDO" mapperName="LifePayBillDAO"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableSelectByExample="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="bill_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="mydb" tableName="lifepay_family" domainObjectName="LifePayFamilyDO"
+               mapperName="LifePayFamilyDAO"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableSelectByExample="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="family_id" sqlStatement="MySql"/>
+        </table>
+
+        <!--<table schema="mydb" tableName="lifepay_user" domainObjectName="LifePayUserDO" mapperName="LifePayUserDAO"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableSelectByExample="true">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="usr_id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+
+
+        <!--<table schema="mydb" tableName="lifepay_power_use_record" domainObjectName="LifePayPowerUseRecordDO"-->
+               <!--mapperName="LifePayPowerUseRecordDAO"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableSelectByExample="true">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="record_id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+        <!--<table schema="mydb" tableName="lifepay_record" domainObjectName="LifePayRecordDO"-->
+               <!--mapperName="LifePayRecordDAO"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableSelectByExample="true">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="record_id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+
+        <!--<table schema="mydb" tableName="lifepay_family_desc" domainObjectName="LifePayFamilyDescDO"-->
+               <!--mapperName="LifePayFamilyDescDAO"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableSelectByExample="true">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="desc_id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+
+        <!--<table schema="mydb" tableName="app" domainObjectName="AppDO"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableSelectByExample="true">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>
